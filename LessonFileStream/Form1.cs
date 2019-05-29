@@ -88,15 +88,14 @@ namespace LessonFileStream
         private void loading_Click(object sender, EventArgs e)
         {
             int i = 1;
-            /*Dictionary<string, string> saveGame = new Dictionary<string, string>();
-            List<string[]> arr = new List<string[]>();*/
+            
             using (StreamReader reader = File.OpenText(path))
             {
-                //string[] line = new string[2];
+                
 
                 do
                 {
-                    string line = reader.ReadLine();
+                    string[] line = reader.ReadLine().Split(':');
                     switch (i)
                     {
                         case 1:
