@@ -16,7 +16,16 @@ namespace LessonFileStream
         public Form1()
         {
             InitializeComponent();
+            //Фрагмент предложенный на форуме часть1
+            for (int i = 0; i < 4; i++)
+            {
+                player[i] = Controls[$"player{i + 1}"] as Label;
+                money[i] = Controls[$"money{i + 1}"] as Label;
+            }
         }
+        //Фрагмент предложенный на форуме часть2
+        Label[] player = new Label[4];
+        Label[] money = new Label[4];
 
         string playName1 = "";
         string playName2 = "";
@@ -87,11 +96,12 @@ namespace LessonFileStream
         
         private void loading_Click(object sender, EventArgs e)
         {
-            int i = 1;
-            
+            #region
+            /*int i = 1;
+
             using (StreamReader reader = File.OpenText(path))
             {
-                
+
 
                 do
                 {
@@ -124,7 +134,23 @@ namespace LessonFileStream
                     }
                 }
                 while (reader != null);
-                    
+
+                }*/
+            #endregion
+
+            //Фрагмент предложенный на форуме часть3
+            using (var reader = new StreamReader(path))
+            {
+                string line = string.Empty;
+                string[] param = reader.ReadLine().Split(':');
+                int i = 0;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    param = line.Split(':');
+                    player[i].Text = param[0];
+                    money[i].Text = param[1];
+                    i++;
+                }
             }
         }
     }
