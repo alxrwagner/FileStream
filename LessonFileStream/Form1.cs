@@ -85,7 +85,7 @@ namespace LessonFileStream
         string path = "./text.txt";
         private void startPlay_Click(object sender, EventArgs e)
         {
-            using (StreamWriter stream = new StreamWriter(path, true))
+            using (StreamWriter stream = new StreamWriter(path/*, true <- Нам нужно перезаписывать, а не добавлять*/))
             {
                 stream.WriteLine($"{playName1}:{playAmount1}" +
                     $"\n{playName2}:{playAmount2}" +
@@ -142,11 +142,11 @@ namespace LessonFileStream
             using (var reader = new StreamReader(path))
             {
                 string line = string.Empty;
-                string[] param = reader.ReadLine().Split(':');
+                string[] param; /*= reader.ReadLine().Split(':'); Ломает логику считывание до входа в цикл*/
                 int i = 0;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    param = line.Split(':');
+                    param = line.Split(':'); //Не надёжно, а если в имени пользователя будет двоеточие? Лучше прямо строка с именем, строка с деньгами, строка с именем следующего, строка с его деньгами, на 4 пользователя будет 8 строк
                     player[i].Text = param[0];
                     money[i].Text = param[1];
                     i++;
